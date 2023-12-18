@@ -1,0 +1,71 @@
+<nz-card class="custom">
+  <div class="header">
+    <p>Quản lý người dùng</p>
+        <button nz-button nzType="primary" (click)="openDialog()" *ngIf="checkVisible('CREATE')">Thêm mới</button>
+  </div>
+</nz-card>
+<nz-card>
+  <p>Tìm kiếm</p>
+  <div nz-row nzGutter="10">
+    <div nz-col nzSpan="8">
+      <label>Từ khóa</label>
+      <input type="text" nz-input [(ngModel)]="keyword" (ngModelChange)="search()">
+    </div>
+    <div nz-col nzSpan="4">
+      <label>Trạng thái</label>
+      <br>
+      <nz-select [(ngModel)]="status" (ngModelChange)="search()">
+        <nz-option [nzValue]="-1" nzLabel="--- Chọn tất cả ---"></nz-option>
+        <nz-option [nzValue]="1" nzLabel="Hoạt động"></nz-option>
+        <nz-option [nzValue]="0" nzLabel="Bị khóa"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</nz-card>
+<nz-card>
+  <nz-table
+    #basicTable
+    [nzData]="users"
+    nzShowPagination
+    [nzFrontPagination]="false"
+    [nzTotal]="this.page.total"
+    (nzPageIndexChange)="onCurrentPageDataChange($event)"
+  >
+    <thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên đăng nhập</th>
+      <th>Họ và tên</th>
+      <th>Giới tính</th>
+      <th>Ngày sinh</th>
+      <th>Email</th>
+      <th>Số điện thoại</th>
+      <th>Trạng thái</th>
+      <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data; index as i">
+      <td>{{((basicTable.nzPageIndex - 1) * basicTable.nzPageSize + 1) + i}}</td>
+      <td>{{ data.userName }}</td>
+      <td>{{ data.fullName }}</td>
+      <td>
+        <p *ngIf="data.gender == 1">Nam</p>
+        <p *ngIf="data.gender == 0">Nữ</p>
+      </td>
+      <td>{{ data.dateOfBirth | date:'dd/MM/YYYY' }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.cellphone }}</td>
+      <td>
+        <button *ngIf="data.status == 1" nz-button nzType="primary">Hoạt động</button>
+        <button *ngIf="data.status == 0" nz-button nzType="dashed">Bị khóa</button>
+      </td>
+      <td style="text-align: center">
+        <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 20px" (click)="edit(data)" *ngIf="checkVisible('UPDATE')"></span>
+        <span nz-icon nzType="delete" nzTheme="outline" style="margin-right: 20px" (click)="delete(data.id)" *ngIf="checkVisible('DELETE')"></span>
+        <span nz-icon nzType="setting" nzTheme="outline" (click)="config(data.id)" *ngIf="checkVisible('CONFIG')"></span>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

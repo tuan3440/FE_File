@@ -1,0 +1,11 @@
+:host ::ng-deep nz-table {
+  th, td {
+    text-align: center;
+  }
+}
+
+:host ::ng-deep .footer-custom-modal {
+  display: flex;
+  gap: 10px;
+}
+

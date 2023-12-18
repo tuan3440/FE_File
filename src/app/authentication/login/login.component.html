@@ -1,0 +1,44 @@
+<form nz-form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label>Tên đăng nhập</nz-form-label>
+    <nz-form-control>
+      <input type="text" nz-input formControlName="username">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Mâ khẩu</nz-form-label>
+    <nz-form-control>
+      <input type="password" nz-input formControlName="password">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item *ngIf="enableCaptcha">
+    <nz-form-label>Captcha</nz-form-label>
+    <nz-form-control>
+      <div nz-row nzGutter="10" nzAlign="middle" nzJustify="start">
+        <div nz-col nzSpan="8">
+          <input type="text" nz-input formControlName="captcha">
+        </div>
+        <div nz-col nzSpan="8">
+          <img src="{{ imgCaptcha }}" alt="">
+        </div>
+        <div nz-col nzSpan="2">
+          <span nz-icon nzType="sync" nzTheme="outline" (click)="refreshCaptcha()"></span>
+        </div>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <label nz-checkbox formControlName="rememberMe">Nhớ mật khẩu</label>
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row nzJustify="center">
+    <button nz-button nzType="primary">Đăng nhập</button>
+  </div>
+  <div nz-row nzJustify="center">
+    Bạn chưa có tk, click<span class="register-button" (click)="register()"> Đăng kí</span>
+  </div>
+  <div nz-row nzJustify="center">
+    <span class="forgetpass-button" (click)="forgetPassword()">Quên mật khẩu</span>
+  </div>
+</form>

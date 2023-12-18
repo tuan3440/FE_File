@@ -1,0 +1,87 @@
+<form nz-form nzLayout="vertical" [formGroup]="formGroup">
+  <div nz-row nzGutter="10">
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired>Mã module</nz-form-label>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="code">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label nzRequired>Tên module</nz-form-label>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="name">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label>Module cha</nz-form-label>
+        <nz-form-control class="select-custom">
+          <nz-select
+            formControlName="parentId"
+            [nzSuffixIcon]="select_modal"
+            [nzDropdownStyle]="{'display': 'none'}"
+          >
+            <nz-option *ngFor="let module of modules" [nzLabel]="module.title" [nzValue]="module.value">
+
+            </nz-option>
+            <ng-template #select_modal>
+              <span nz-icon nzType="arrow-right" nzTheme="outline" (click)="openTreeModule()"></span>
+            </ng-template>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-item>
+        <nz-form-label>Đường dẫn</nz-form-label>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="pathUrl">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="8">
+      <nz-form-item>
+        <nz-form-label>Thứ tự</nz-form-label>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="position">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="8">
+      <nz-form-item>
+        <nz-form-label>Icon</nz-form-label>
+        <nz-form-control>
+          <input type="text" nz-input formControlName="icon">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="8">
+      <nz-form-item>
+        <nz-form-label>Trạng thái</nz-form-label>
+        <nz-form-control>
+          <nz-select formControlName="status">
+            <nz-option [nzValue]="1" nzLabel="Hoạt động"></nz-option>
+            <nz-option [nzValue]="0" nzLabel="Bị khóa"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>Mô tả</nz-form-label>
+        <nz-form-control>
+          <textarea rows="4" nz-input></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+<div nz-row nzJustify="end" nzGutter="10" class="footer-custom-modal">
+  <button nz-button nzType="default" (click)="closePopup()">Hủy</button>
+  <button nz-button nzType="primary" (click)="save()" *ngIf="this.mode == 'create'">Thêm mới</button>
+  <button nz-button nzType="primary" (click)="save()" *ngIf="this.mode == 'edit'">Cập nhật</button>
+</div>

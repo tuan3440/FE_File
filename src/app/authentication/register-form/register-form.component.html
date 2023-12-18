@@ -1,0 +1,29 @@
+<form nz-form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label>Họ và tên</nz-form-label>
+    <nz-form-control>
+      <input type="text" nz-input formControlName="fullName">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Email</nz-form-label>
+    <nz-form-control>
+      <input type="text" nz-input formControlName="email">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Tên đăng nhập</nz-form-label>
+    <nz-form-control>
+      <input type="text" nz-input formControlName="login">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>Mât khẩu</nz-form-label>
+    <nz-form-control>
+      <input type="password" nz-input formControlName="password">
+    </nz-form-control>
+  </nz-form-item>
+  <div nz-row nzJustify="center">
+    <button nz-button nzType="primary">Đăng kí</button>
+  </div>
+</form>

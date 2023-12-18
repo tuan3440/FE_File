@@ -1,0 +1,22 @@
+<form nz-form nzLayout="vertical" [formGroup]="formGroup">
+  <div nz-row>
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-label>Chọn vai trò</nz-form-label>
+        <nz-form-control>
+          <nz-select
+            nzAllowClear
+            nzMode="default"
+            formControlName="roleId"
+          >
+            <nz-option [nzValue]="role.id" [nzLabel]="role.name" *ngFor="let role of roleList"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+<div nz-row nzJustify="end" nzGutter="10" class="footer-custom-modal">
+  <button nz-button nzType="default" (click)="closePopup()">Hủy</button>
+  <button nz-button nzType="primary" (click)="save()">Lưu</button>
+</div>

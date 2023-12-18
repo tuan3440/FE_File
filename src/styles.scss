@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+nz-select {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+nz-card {
+  &.custom {
+    .ant-card-body {
+      padding: 12px;
+    }
+  }
+}
+
+:host ::ng-deep nz-form-item .ant-form-item-control.select-custom nz-select-arrow {
+  display: none !important;
+}
