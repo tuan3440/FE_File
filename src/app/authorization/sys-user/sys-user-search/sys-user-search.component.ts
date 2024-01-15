@@ -16,6 +16,10 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 import {SysUserService} from "../../../@core/service/authorization/sysUser.service";
 import {SysUserRoleComponent} from "../sys-user-role/sys-user-role.component";
 import {CommonUtils} from "../../../@core/service/common-utils.service";
+import {SysRoleFormComponent} from "../../sys-role/sys-role-form/sys-role-form.component";
+import {SysUserCreateComponent} from "../sys-user-create/sys-user-create.component";
+import {SysRole} from "../../../@core/model/authorization/sysRole.model";
+import {SysUserImportComponent} from "../sys-user-import/sys-user-import.component";
 
 @Component({
   selector: 'app-sys-user-search',
@@ -38,6 +42,7 @@ export class SysUserSearchComponent implements OnInit {
     size: 10,
     sort: ''
   }
+  urlDownloadFileImport: string = '';
   constructor(
     private _sysRoleService: SysRoleService,
     private _modalService: NzModalService,
@@ -71,12 +76,6 @@ export class SysUserSearchComponent implements OnInit {
     )
   }
 
-
-
-  edit(data: SysUser) {
-
-  }
-
   delete(id: number | undefined) {
 
   }
@@ -107,6 +106,64 @@ export class SysUserSearchComponent implements OnInit {
   }
 
   openDialog() {
+    this._modalService.create({
+      nzTitle: 'Thêm mới người dùng',
+      nzContent: SysUserCreateComponent,
+      nzWidth: '60vw',
+      nzFooter: null,
+      nzData: {
+        close: () => {
+          this.search();
+        }
+      }
+    })
+  }
 
+  edit(data: SysUser) {
+    this._modalService.create({
+      nzTitle: 'Sửa thông tin người dùng',
+      nzContent: SysUserCreateComponent,
+      nzWidth: '60vw',
+      nzFooter: null,
+      nzData: {
+        user: data,
+        close: () => {
+          this.search();
+        }
+      }
+    })
+  }
+
+  export() {
+    this._sysUserService.export().subscribe(
+      res => {
+        console.log(res);
+        const blob = new Blob([res.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'your-excel-file.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        // FileSaver.saveAs(res.body, 'test.xlsx');
+      }
+    )
+  }
+
+  import() {
+    this._modalService.create(
+      {
+        nzTitle: 'Upload file import',
+        nzContent: SysUserImportComponent,
+        nzWidth: '60vw',
+        nzFooter: null,
+        nzData: {
+          close: () => {
+            this.search();
+          }
+        }
+      }
+    )
   }
 }

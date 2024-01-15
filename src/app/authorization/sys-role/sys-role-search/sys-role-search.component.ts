@@ -86,7 +86,7 @@ export class SysRoleSearchComponent implements OnInit {
 
   edit(data: SysRole) {
     this._modalService.create({
-      nzTitle: 'Thêm mới vai trò',
+      nzTitle: 'Sửa vai trò',
       nzContent: SysRoleFormComponent,
       nzWidth: '60vw',
       nzFooter: null,

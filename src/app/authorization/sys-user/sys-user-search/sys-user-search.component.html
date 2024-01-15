@@ -1,7 +1,13 @@
 <nz-card class="custom">
   <div class="header">
-    <p>Quản lý người dùng</p>
-        <button nz-button nzType="primary" (click)="openDialog()" *ngIf="checkVisible('CREATE')">Thêm mới</button>
+    <div nz-row>
+      Quản lý người dùng
+    </div>
+    <div nz-row nzJustify="end" nzGutter="10">
+      <button nz-button style="margin-right: 10px" nzType="primary" (click)="openDialog()" *ngIf="checkVisible('CREATE')">Thêm mới</button>
+      <button nz-button style="margin-right: 10px" nzType="primary" (click)="export()" *ngIf="checkVisible('EXPORT')">Xuất</button>
+      <button nz-button nzType="primary" (click)="import()" *ngIf="checkVisible('IMPORT')">Nhập</button>
+    </div>
   </div>
 </nz-card>
 <nz-card>

@@ -10,5 +10,6 @@ export interface SysUser {
   deptId?: number,
   status?: number,
   email?: string,
-  cellphone?: string
+  cellphone?: string,
+  imageUrl?: string
 }

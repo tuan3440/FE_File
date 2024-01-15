@@ -1,0 +1,17 @@
+<div nz-row nzJustify="center">
+  <a href="{{urlDownloadFileImport}}">Tải file biểu mẫu</a>
+</div>
+<div nz-row nzJustify="center">
+  <div class="d-flex justify-content-center" draggable="true" *ngIf="!file" >
+    <input (change)="handleChange($event)" id="filePdf"
+           name="filePdf"
+           type="file" multiple="false" hidden />
+    <label class="input-label" for="filePdf">
+      <i nz-icon nzType="upload"></i>
+      <span class="attach-text" style="color: #ad0025 !important;">Chọn tệp</span>
+    </label>
+  </div>
+</div>
+<div nz-row nzJustify="center">
+  <button nz-button nzType="default" *ngIf="file" (click)="import()">Import</button>
+</div>
