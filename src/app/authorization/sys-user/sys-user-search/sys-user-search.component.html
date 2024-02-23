@@ -69,7 +69,7 @@
       <td style="text-align: center">
         <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 20px" (click)="edit(data)" *ngIf="checkVisible('UPDATE')"></span>
         <span nz-icon nzType="delete" nzTheme="outline" style="margin-right: 20px" (click)="delete(data.id)" *ngIf="checkVisible('DELETE')"></span>
-        <span nz-icon nzType="setting" nzTheme="outline" (click)="config(data.id)" *ngIf="checkVisible('CONFIG')"></span>
+        <span nz-icon nzType="file-markdown" nzTheme="outline" (click)="downloadTemplate(data.id)" *ngIf="checkVisible('EXPORT')"></span>
       </td>
     </tr>
     </tbody>

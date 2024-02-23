@@ -135,14 +135,31 @@ export class SysUserSearchComponent implements OnInit {
   }
 
   export() {
-    this._sysUserService.export().subscribe(
+    this._sysUserService.exportWithTemplateFromS3().subscribe(
       res => {
         console.log(res);
         const blob = new Blob([res.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'your-excel-file.xlsx';
+        a.download = 'users_list.xls';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        // FileSaver.saveAs(res.body, 'test.xlsx');
+      }
+    )
+  }
+
+  export2() {
+    this._sysUserService.exportWithTemplateFromResource().subscribe(
+      res => {
+        console.log(res);
+        const blob = new Blob([res.body], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'users_list.xls';
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
@@ -165,5 +182,22 @@ export class SysUserSearchComponent implements OnInit {
         }
       }
     )
+  }
+
+  downloadTemplate(id: number | undefined) {
+    if (id !== undefined) {
+      this._sysUserService.exportTemplateInfoUser(id).subscribe(
+        res => {
+          const blob = new Blob([res.body], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'user_info.docx';
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+        }
+      )
+    }
   }
 }

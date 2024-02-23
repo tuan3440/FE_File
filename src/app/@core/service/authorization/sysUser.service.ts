@@ -33,7 +33,7 @@ export class SysUserService {
     return `${environment.serverUrl.apiUrl}${urlImages}`;
   }
 
-  public export() {
+  public exportWithTemplateFromS3() {
     const httpOptions : Object = {
       headers: new HttpHeaders({
         'Content-Type': 'text/plain; charset=utf-8'
@@ -41,8 +41,32 @@ export class SysUserService {
       responseType: "blob", observe: 'response'
       // responseType: 'text'
     };
-    return this.http.get<any>(`${environment.serverUrl.apiUrl}/admin/user/exportWithTemplate`, httpOptions
+    return this.http.get<any>(`${environment.serverUrl.apiUrl}/admin/user/exportWithTemplateFromS3`, httpOptions
      );
+  }
+
+  public exportWithTemplateFromResource() {
+    const httpOptions : Object = {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/plain; charset=utf-8'
+      }),
+      responseType: "blob", observe: 'response'
+      // responseType: 'text'
+    };
+    return this.http.get<any>(`${environment.serverUrl.apiUrl}/admin/user/exportWithTemplateFromResource`, httpOptions
+    );
+  }
+
+  public exportTemplateInfoUser(id: number) {
+    const httpOptions : Object = {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/plain; charset=utf-8'
+      }),
+      responseType: "blob", observe: 'response'
+      // responseType: 'text'
+    };
+    return this.http.get<any>(`${environment.serverUrl.apiUrl}/admin/user/exportUserInfo/${id}`, httpOptions
+    );
   }
 
   createUrl() {
